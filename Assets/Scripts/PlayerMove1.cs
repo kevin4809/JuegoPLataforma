@@ -8,11 +8,11 @@ public class PlayerMove1 : MonoBehaviour {
     public Animator anim;
     public float runSpeed = 40f;
     float prueba;
-    float horizontalMove = 0f;
+    public float horizontalMove = 0f;
     bool jump = false;
     bool crouch = false;
     public Rigidbody2D body;
-    public  float countDashh = 1;
+    public  float countDashh = 0.8f;
 
 
     float countTime;
@@ -31,29 +31,29 @@ public class PlayerMove1 : MonoBehaviour {
 
         if (controller.m_Grounded) { anim.SetBool("Isjumping", false); } else { anim.SetBool("Isjumping", true); }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && horizontalMove > 0 && countDashh >= 0)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && countDashh >= 0 && controller.m_Grounded)
         {
-                isSlider = true;
+             isSlider = true;
                
         }
-        else if (Input.GetKeyDown(KeyCode.LeftShift) && horizontalMove < 0 && countDashh >= 0)
+        else if (Input.GetKeyDown(KeyCode.LeftShift)  && countDashh >= 0 && controller.m_Grounded)
         {
-            isSlider2 = true;
-            
+            isSlider2 = true;     
         }
         else { prueba = 0; }
 
-        if (countDashh < 0) { StartCoroutine(countDash()); }
+        if (countDashh < 0) { StartCoroutine(countDash()); isSlider = false; isSlider2 = false; }
 
         Dash();
     }
 
     IEnumerator countDash()
     {
-        yield return new WaitForSeconds(1);
-        countDashh = 1;
+        yield return new WaitForSeconds(0.8f);
+        countDashh = 0.8f;
         isSlider = false;
         isSlider2 = false;
+        runSpeed = 40f;
     }
    
     void FixedUpdate()
@@ -67,15 +67,15 @@ public class PlayerMove1 : MonoBehaviour {
         if (isSlider)
         {
             prueba = 1;
-           // body.AddForceAtPosition(transform.right, transform.position, ForceMode2D.Impulse);
-           runSpeed
+            runSpeed = 80f;
+     
             countDashh -= Time.deltaTime;
         }
 
         if (isSlider2)
         {
             prueba = 1;
-          //  body.AddForceAtPosition(-transform.right, transform.position, ForceMode2D.Impulse);
+            runSpeed = 80f;
             countDashh -= Time.deltaTime;
         }
     }
