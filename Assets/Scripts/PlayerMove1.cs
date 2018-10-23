@@ -29,7 +29,11 @@ public class PlayerMove1 : MonoBehaviour {
         anim.SetFloat("Speed", Mathf.Abs(horizontalMove));
         anim.SetFloat("Isdash", Mathf.Abs(prueba));
 
-        if (controller.m_Grounded) { anim.SetBool("Isjumping", false); } else { anim.SetBool("Isjumping", true); }
+
+        AnimatorStateInfo stateinfo = anim.GetCurrentAnimatorStateInfo(0);
+        bool JumpingWall = stateinfo.IsName("Jump_Wall");
+
+        if (controller.m_Grounded && !JumpingWall) { anim.SetBool("Isjumping", false); } else { anim.SetBool("Isjumping", true); }
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && countDashh >= 0 && controller.m_Grounded)
         {
