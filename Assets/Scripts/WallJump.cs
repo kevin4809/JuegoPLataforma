@@ -11,6 +11,7 @@ public class WallJump : MonoBehaviour
     public float salt = 2f;
     bool walljumping;
     public Animator anim;
+    public LayerMask layer;
 
     // Use this for initialization
     void Start()
@@ -22,10 +23,10 @@ public class WallJump : MonoBehaviour
     void Update()
     {
         Physics2D.queriesStartInColliders = false;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, distance);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, distance, layer);
 
 
-        if (hit.collider != null && Input.GetButtonDown("Jump"))
+        if (hit.collider && Input.GetButtonDown("Jump"))
         {
             //controller.outsideForce = true;
             GetComponent<Rigidbody2D>().velocity = new Vector2(speed * hit.normal.x, salt);
@@ -36,7 +37,7 @@ public class WallJump : MonoBehaviour
 
         }
 
-        if (hit.collider != null)
+        if (hit.collider)
         {
             anim.SetBool("Iswall", true);
             GetComponent<Rigidbody2D>().gravityScale = 2.2f;
@@ -45,6 +46,7 @@ public class WallJump : MonoBehaviour
         {
             anim.SetBool("Iswall", false);
             GetComponent<Rigidbody2D>().gravityScale = 3f;
+        
         }
 
 

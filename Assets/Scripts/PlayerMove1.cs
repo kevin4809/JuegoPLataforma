@@ -2,85 +2,89 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMove1 : MonoBehaviour {
+public class PlayerMove1 : MonoBehaviour
+{
 
-    public CharapterController controller;
+    CharapterController controller;
     public Animator anim;
     public float runSpeed = 40f;
     float prueba;
-    public float horizontalMove = 0f;
+    private float horizontalMove = 0f;
     bool jump = false;
     bool crouch = false;
     public Rigidbody2D body;
-    public  float countDashh = 0.8f;
+   
 
+    private float direction;
+    private float dashTime;
+    public float dashSpeed;
+    public float startDashTime;
 
-    float countTime;
-    bool isSlider;
-    bool isSlider2;
+    private void Start()
+    {
+        controller = GetComponent<CharapterController>();
+    }
+
     void Update()
     {
 
+        AnimatorStateInfo stateinfo = anim.GetCurrentAnimatorStateInfo(0);
+        bool JumpingWall = stateinfo.IsName("Jump_Wall");
+        bool heSlide = stateinfo.IsName("Dash");
+
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
-        if (Input.GetButtonDown("Jump")) { jump = true;}
+        if (Input.GetButtonDown("Jump") && !heSlide ) { jump = true; }
         crouch = Input.GetButtonDown("Crouch") ? true : false;
 
         anim.SetFloat("Speed", Mathf.Abs(horizontalMove));
-        anim.SetFloat("Isdash", Mathf.Abs(prueba));
 
-
-        AnimatorStateInfo stateinfo = anim.GetCurrentAnimatorStateInfo(0);
-        bool JumpingWall = stateinfo.IsName("Jump_Wall");
 
         if (controller.m_Grounded && !JumpingWall) { anim.SetBool("Isjumping", false); } else { anim.SetBool("Isjumping", true); }
-
-        if (Input.GetKeyDown(KeyCode.LeftShift) && countDashh >= 0 && controller.m_Grounded)
-        {
-             isSlider = true;
-               
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftShift)  && countDashh >= 0 && controller.m_Grounded)
-        {
-            isSlider2 = true;     
-        }
-        else { prueba = 0; }
-
-        if (countDashh < 0) { StartCoroutine(countDash()); isSlider = false; isSlider2 = false; }
-
         Dash();
+
     }
 
-    IEnumerator countDash()
+    void Dash()
     {
-        yield return new WaitForSeconds(0.8f);
-        countDashh = 0.8f;
-        isSlider = false;
-        isSlider2 = false;
-        runSpeed = 40f;
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && direction == 0 && controller.m_Grounded)
+        {
+            if (controller.m_FacingRight) { direction = 1; }
+            if (!controller.m_FacingRight) { direction = 2; }
+        }
+
+        if (direction == 1)
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector2.right * dashSpeed;
+            dashTime -= Time.deltaTime;
+            anim.SetBool("Isdash", true);
+
+        }
+
+        if (direction == 2)
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector2.left * dashSpeed;
+            dashTime -= Time.deltaTime;
+            anim.SetBool("Isdash", true);
+
+        }
+
+
+        if (dashTime <= 0)
+        {
+            direction = 0;
+            dashTime = startDashTime;
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            anim.SetBool("Isdash", false);
+        }
     }
-   
+
     void FixedUpdate()
     {
         controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
         jump = false;
     }
 
-    void Dash()
-    {
-        if (isSlider)
-        {
-            prueba = 1;
-            runSpeed = 80f;
-     
-            countDashh -= Time.deltaTime;
-        }
 
-        if (isSlider2)
-        {
-            prueba = 1;
-            runSpeed = 80f;
-            countDashh -= Time.deltaTime;
-        }
-    }
 }
