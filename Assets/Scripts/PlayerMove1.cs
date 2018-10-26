@@ -42,6 +42,7 @@ public class PlayerMove1 : MonoBehaviour
 
         if (controller.m_Grounded && !JumpingWall) { anim.SetBool("Isjumping", false); } else { anim.SetBool("Isjumping", true); }
         Dash();
+        
 
     }
 

@@ -24,7 +24,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        
+       
 
         if (timeBtwAttack <= 0)
         {
