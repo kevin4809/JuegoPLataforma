@@ -31,8 +31,15 @@ public class PlayerMove1 : MonoBehaviour
         AnimatorStateInfo stateinfo = anim.GetCurrentAnimatorStateInfo(0);
         bool JumpingWall = stateinfo.IsName("Jump_Wall");
         bool heSlide = stateinfo.IsName("Dash");
+        bool isFall = stateinfo.IsName("Down_Player");
+        bool isUp = stateinfo.IsName("Up_Player");
 
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        if (!isFall && !isUp)
+        {
+            horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        }
+       
+
 
         if (Input.GetButtonDown("Jump") && !heSlide ) { jump = true; }
         crouch = Input.GetButtonDown("Crouch") ? true : false;
@@ -42,6 +49,7 @@ public class PlayerMove1 : MonoBehaviour
 
         if (controller.m_Grounded && !JumpingWall) { anim.SetBool("Isjumping", false); } else { anim.SetBool("Isjumping", true); }
         Dash();
+
         
 
     }
@@ -83,6 +91,7 @@ public class PlayerMove1 : MonoBehaviour
 
     void FixedUpdate()
     {
+        
         controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
         jump = false;
     }

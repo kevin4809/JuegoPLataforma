@@ -41,6 +41,7 @@ public class WallJump : MonoBehaviour
         {
             anim.SetBool("Iswall", true);
             GetComponent<Rigidbody2D>().gravityScale = 2.2f;
+           
         }
         else
         {

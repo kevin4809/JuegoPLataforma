@@ -400,7 +400,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 603404225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.86, y: 2.024, z: 0}
+  m_LocalPosition: {x: 4.86, y: 2.031, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 1976241646}
@@ -417,7 +417,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.06, y: 0}
@@ -472,11 +472,13 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 256
-  startTimeBtwAttack: 1
+  healt: 100
+  startTimeBtwAttack: 1.5
   attackPos: {fileID: 2138800657}
   attackRange: 0.19
-  damage: 50
   speetInAttack: 5
+  sword: {fileID: 2138800658}
+  startRest: 2
 --- !u!1 &633855840
 GameObject:
   m_ObjectHideFlags: 3
@@ -567,7 +569,7 @@ GameObject:
   - component: {fileID: 719774961}
   m_Layer: 8
   m_Name: CellingCheck
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -801,7 +803,7 @@ GameObject:
   - component: {fileID: 1177482356}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1035,7 +1037,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   attackRange: 0.18
-  damage: 50
+  damage: 20
   speedAttack: 5
   startTimeBtwAttack: 0.6
 --- !u!114 &1177482355
@@ -1079,7 +1081,7 @@ GameObject:
   - component: {fileID: 1557657397}
   m_Layer: 8
   m_Name: AttackPos
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1257,7 +1259,7 @@ GameObject:
   - component: {fileID: 2115885141}
   m_Layer: 8
   m_Name: GroundCheck
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1349,10 +1351,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2138800657}
+  - component: {fileID: 2138800658}
+  - component: {fileID: 2138800659}
   m_Layer: 0
   m_Name: AttackPos
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1363,9 +1367,47 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2138800656}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.205, y: -0.0034999847, z: -0.4873047}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 0.162, y: -0.009, z: -0.4873047}
+  m_LocalScale: {x: 0.20929685, y: 0.24703124, z: 0.5}
   m_Children: []
   m_Father: {fileID: 603404228}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &2138800658
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2138800656}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.36, y: 0.34}
+  m_EdgeRadius: 0
+--- !u!114 &2138800659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2138800656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7207be1a124ca4c4fa895483c4bd63c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerLive: {fileID: 1177482356}
+  damage: 50

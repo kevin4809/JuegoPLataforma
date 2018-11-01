@@ -18,13 +18,13 @@ public class PlayerAttack : MonoBehaviour
     public float startTimeBtwAttack;
 
     private void Start()
-    {  
-            controller = GetComponent<CharapterController>(); 
+    {
+        controller = GetComponent<CharapterController>();
     }
 
     private void Update()
     {
-       
+
 
         if (timeBtwAttack <= 0)
         {
@@ -44,7 +44,7 @@ public class PlayerAttack : MonoBehaviour
         else { timeBtwAttack -= Time.deltaTime; }
 
         isAttack = Input.GetButton("Fire1") ? true : false;
-        if (isAttack && controller.m_Grounded )
+        if (isAttack && controller.m_Grounded)
         {
             anim.SetBool("Isattack", true);
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, speedAttack);
