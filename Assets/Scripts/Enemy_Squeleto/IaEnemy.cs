@@ -110,6 +110,7 @@ public class IaEnemy : MonoBehaviour
             healt -= damage;
             anim.SetTrigger("HeDamage");
             // transform.Translate(Vector3.left * distance * Time.deltaTime);
+            rest = startRest;
 
         }
     }
@@ -175,7 +176,7 @@ public class IaEnemy : MonoBehaviour
     {
         if (heIsDeath)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.8f);
             Destroy(gameObject);
         }
         yield return new WaitForSeconds(0.7f);

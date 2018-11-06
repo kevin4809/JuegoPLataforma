@@ -13,7 +13,9 @@ public class PlayerMove1 : MonoBehaviour
     bool jump = false;
     bool crouch = false;
     public Rigidbody2D body;
-   
+
+    public CircleCollider2D collider_Charapter;
+    public BoxCollider2D dash_Collider_Charapter;
 
     private float direction;
     private float dashTime;
@@ -23,6 +25,7 @@ public class PlayerMove1 : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<CharapterController>();
+        dash_Collider_Charapter.enabled = false;
     }
 
     void Update()
@@ -68,6 +71,8 @@ public class PlayerMove1 : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = Vector2.right * dashSpeed;
             dashTime -= Time.deltaTime;
             anim.SetBool("Isdash", true);
+            dash_Collider_Charapter.enabled = true;
+            collider_Charapter.isTrigger = true;
 
         }
 
@@ -76,6 +81,8 @@ public class PlayerMove1 : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = Vector2.left * dashSpeed;
             dashTime -= Time.deltaTime;
             anim.SetBool("Isdash", true);
+            dash_Collider_Charapter.enabled = true;
+            collider_Charapter.isTrigger = true;
 
         }
 
@@ -86,6 +93,8 @@ public class PlayerMove1 : MonoBehaviour
             dashTime = startDashTime;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             anim.SetBool("Isdash", false);
+            dash_Collider_Charapter.enabled = false;
+            collider_Charapter.isTrigger = false;
         }
     }
 
