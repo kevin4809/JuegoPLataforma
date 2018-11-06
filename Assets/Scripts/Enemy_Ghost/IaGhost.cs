@@ -14,6 +14,8 @@ public static bool heIsRight;
 private float timeBtwShot;
 SpriteRenderer spriteRenderer;
 public float startTimeBtwShots;
+
+    public float healt = 100;
 //public LayerMask layer;
 void Awake()
 {
@@ -55,9 +57,18 @@ void Update()
 			heIsRight = false;
 		}
 	
-	
+	    if(healt <= 0)
+        {
+            Debug.Log("HeIsDeath");
+        }
 	
 }
+
+
+    public void TakeDamage ( int damage)
+    {
+        healt -= damage;
+    }
  
 
  IEnumerator CountAttack()
