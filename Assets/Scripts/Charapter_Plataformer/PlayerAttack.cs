@@ -50,10 +50,17 @@ public class PlayerAttack : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, speedAttack);
 
         }
-        else
+        else if(!isAttack)
         {
             anim.SetBool("Isattack", false);
         }
+
+        if (isAttack && !controller.m_Grounded)
+        {
+            anim.SetTrigger("Airattack");
+         
+        }
+        
 
 
     }

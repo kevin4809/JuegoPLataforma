@@ -36,6 +36,7 @@ public class PlayerMove1 : MonoBehaviour
         bool heSlide = stateinfo.IsName("Dash");
         bool isFall = stateinfo.IsName("Down_Player");
         bool isUp = stateinfo.IsName("Up_Player");
+        bool isAirAttack = stateinfo.IsName("Player_air_attack");
 
         if (!isFall && !isUp)
         {
@@ -50,7 +51,8 @@ public class PlayerMove1 : MonoBehaviour
         anim.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
 
-        if (controller.m_Grounded && !JumpingWall) { anim.SetBool("Isjumping", false); } else { anim.SetBool("Isjumping", true); }
+        if (controller.m_Grounded && !JumpingWall && !isAirAttack) { anim.SetBool("Isjumping", false); } else { anim.SetBool("Isjumping", true); }
+      
         Dash();
 
         
