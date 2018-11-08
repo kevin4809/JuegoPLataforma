@@ -22,6 +22,11 @@ public class CharapterController : MonoBehaviour
     public bool m_FacingRight = true;  // For determining which way the player is currently facing.
     private Vector3 m_Velocity = Vector3.zero;
 
+    float numberSalt = 2;
+
+    float countSalt;
+    public float startCountSalt;
+
     [Header("Events")]
     [Space]
 
@@ -128,12 +133,23 @@ public class CharapterController : MonoBehaviour
              }
          }
          // If the player should jump...
-         if (m_Grounded && jump)
+         if ( jump)
          {
              // Add a vertical force to the player.
              m_Grounded = false;
-             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+            if(numberSalt > 0)
+            {
+                m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+                numberSalt--;
+              
+            }
+           
          }
+
+        if (m_Grounded)
+        {
+            numberSalt = 2;
+        }
      }
 
 

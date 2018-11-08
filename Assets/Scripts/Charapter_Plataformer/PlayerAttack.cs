@@ -6,6 +6,7 @@ public class PlayerAttack : MonoBehaviour
 {
     public Animator anim;
     bool isAttack = false;
+    public  bool isAttackAir = false;
     public CharapterController controller;
 
     public Transform attackPos;
@@ -16,6 +17,12 @@ public class PlayerAttack : MonoBehaviour
 
     float timeBtwAttack;
     public float startTimeBtwAttack;
+
+    float countAttack;
+    public float StartCountAttack;
+
+    float countAttackAir;
+    public float StartCountAttackAir;
 
     private void Start()
     {
@@ -43,11 +50,45 @@ public class PlayerAttack : MonoBehaviour
         }
         else { timeBtwAttack -= Time.deltaTime; }
 
-        isAttack = Input.GetButton("Fire1") ? true : false;
+        //isAttack = Input.GetButtonDown("Fire1") ? true : false;
+
+        if (isAttack = Input.GetButtonDown("Fire1"))
+        {
+            countAttack = StartCountAttack;
+        }
+            if (countAttack >= 0)
+        {
+            isAttack = true;
+            countAttack -= Time.deltaTime;
+
+        }
+        else { isAttack = false; }
+
+
+        if (Input.GetButtonDown("Fire1") && !controller.m_Grounded)
+        {
+            
+            countAttackAir = StartCountAttackAir;
+        }
+        if(countAttackAir >= 0)
+        {
+            isAttackAir = true;
+            countAttackAir -= Time.deltaTime;
+        }
+        else
+        {
+            isAttackAir = false;
+        }
+               
+            
+        
+     
+       
+
         if (isAttack && controller.m_Grounded)
         {
             anim.SetBool("Isattack", true);
-            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, speedAttack);
+          GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, speedAttack);
 
         }
         else if(!isAttack)
@@ -55,10 +96,16 @@ public class PlayerAttack : MonoBehaviour
             anim.SetBool("Isattack", false);
         }
 
-        if (isAttack && !controller.m_Grounded)
+        if (isAttackAir)
         {
-            anim.SetTrigger("Airattack");
-         
+            anim.SetBool("Airattack", true);
+          
+
+
+        }
+        else
+        {
+            anim.SetBool("Airattack", false);
         }
         
 

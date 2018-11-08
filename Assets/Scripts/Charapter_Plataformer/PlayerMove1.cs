@@ -22,6 +22,8 @@ public class PlayerMove1 : MonoBehaviour
     public float dashSpeed;
     public float startDashTime;
 
+    float numJumps;
+
     private void Start()
     {
         controller = GetComponent<CharapterController>();
@@ -51,7 +53,14 @@ public class PlayerMove1 : MonoBehaviour
         anim.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
 
-        if (controller.m_Grounded && !JumpingWall && !isAirAttack) { anim.SetBool("Isjumping", false); } else { anim.SetBool("Isjumping", true); }
+        if (controller.m_Grounded && !JumpingWall) {  anim.SetBool("Isjumping", false); } else if (!isAirAttack) { anim.SetBool("Isjumping", true); }
+
+
+        if (isAirAttack)
+        {
+            anim.SetBool("Isjumping", false);
+        }
+        
       
         Dash();
 
@@ -61,8 +70,10 @@ public class PlayerMove1 : MonoBehaviour
 
     void Dash()
     {
+        AnimatorStateInfo stateinfo = anim.GetCurrentAnimatorStateInfo(0);
+        bool heWalking = stateinfo.IsName("Walk_Player");
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && direction == 0 && controller.m_Grounded)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && direction == 0 && controller.m_Grounded && heWalking)
         {
             if (controller.m_FacingRight) { direction = 1; }
             if (!controller.m_FacingRight) { direction = 2; }

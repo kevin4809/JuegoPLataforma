@@ -36,8 +36,13 @@ public class WallJump : MonoBehaviour
         else
         {
             anim.SetBool("Iswall", false);
-            GetComponent<Rigidbody2D>().gravityScale = 3f;
+            
         
+        }
+
+        if (controller.m_Grounded)
+        {
+            GetComponent<Rigidbody2D>().gravityScale = 3f;
         }
 
         if (hit.collider && Input.GetButtonDown("Jump"))
