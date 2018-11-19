@@ -23,11 +23,13 @@ public class PlayerMove1 : MonoBehaviour
     public float startDashTime;
 
     float numJumps;
-
+    float time_Recover;
+    float save_RunSpeed;
     private void Start()
     {
         controller = GetComponent<CharapterController>();
         dash_Collider_Charapter.enabled = false;
+        save_RunSpeed = runSpeed;
     }
 
     void Update()
@@ -39,13 +41,26 @@ public class PlayerMove1 : MonoBehaviour
         bool isFall = stateinfo.IsName("Down_Player");
         bool isUp = stateinfo.IsName("Up_Player");
         bool isAirAttack = stateinfo.IsName("Player_air_attack");
+        bool heIsDown = stateinfo.IsName("Down_Player");
 
-        if (!isFall && !isUp)
+        if ( !isUp)
         {
             horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
         }
-       
 
+        if (isFall)
+        {
+           
+            runSpeed = 0;
+            time_Recover = 1f;
+        }
+
+        time_Recover -= Time.deltaTime;
+        if(time_Recover <= 0)
+        {
+            runSpeed = save_RunSpeed;
+        }
+       
 
         if (Input.GetButtonDown("Jump") && !heSlide ) { jump = true; }
         crouch = Input.GetButtonDown("Crouch") ? true : false;
@@ -109,6 +124,7 @@ public class PlayerMove1 : MonoBehaviour
             dash_Collider_Charapter.enabled = false;
             collider_Charapter.isTrigger = false;
         }
+
     }
 
     void FixedUpdate()

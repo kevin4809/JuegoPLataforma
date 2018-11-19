@@ -29,6 +29,8 @@ public class IaEnemy : MonoBehaviour
     bool heIsDeath = false;
     Collider2D enemyTrigger;
 
+   public float probably_Attack;
+
     public float speetInAttack;
     Rigidbody2D rb;
 
@@ -65,21 +67,8 @@ public class IaEnemy : MonoBehaviour
         RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, distance);
         if (groundInfo.collider == false && !heIsDeath)
         {
-            if (movingRight == true)
-            {
-                transform.Translate(Vector2.right * speed * Time.deltaTime);
-                movingRight = false;
-                Vector3 theScale = transform.localScale; theScale.x *= -1; transform.localScale = theScale;
-                rb.velocity = Vector2.zero;
-            }
-            else
-            {
-                transform.Translate(Vector2.left * speed * Time.deltaTime);
-                movingRight = true;
-                Vector3 theScale = transform.localScale; theScale.x *= -1; transform.localScale = theScale;
-                rb.velocity = Vector2.zero;
-            }
 
+            turn();
 
         }
 
@@ -99,6 +88,7 @@ public class IaEnemy : MonoBehaviour
 
         rest -= Time.deltaTime;
 
+        
     }
 
     public void TakeDamage(int damage)
@@ -111,11 +101,19 @@ public class IaEnemy : MonoBehaviour
             anim.SetTrigger("HeDamage");
             // transform.Translate(Vector3.left * distance * Time.deltaTime);
             rest = startRest;
-
+            probably_Attack = Random.Range(0, 2);
+           
         }
     }
     void Attack()
     {
+
+        if (probably_Attack == 1)
+        {
+            turn();
+            probably_Attack = 0;
+
+        }
 
         AnimatorStateInfo stateinfo = anim.GetCurrentAnimatorStateInfo(0);
         bool isHurt = stateinfo.IsName("Hurt_Enemy");
@@ -163,6 +161,24 @@ public class IaEnemy : MonoBehaviour
 
     }
 
+
+    public void turn()
+    {
+        if (movingRight == true)
+        {
+            transform.Translate(Vector2.right * speed * Time.deltaTime);
+            movingRight = false;
+            Vector3 theScale = transform.localScale; theScale.x *= -1; transform.localScale = theScale;
+            rb.velocity = Vector2.zero;
+        }
+        else
+        {
+            transform.Translate(Vector2.left * speed * Time.deltaTime);
+            movingRight = true;
+            Vector3 theScale = transform.localScale; theScale.x *= -1; transform.localScale = theScale;
+            rb.velocity = Vector2.zero;
+        }
+    }
     void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
@@ -196,19 +212,5 @@ public class IaEnemy : MonoBehaviour
     }
 
 
-    /*  if (timeBtwAttack <= 0)
-       {
-
-           timeBtwAttack = startTimeBtwAttack;
-
-       }
-       else { timeBtwAttack -= Time.deltaTime; }*/
-
-
-    /* for (int i = 0; i < playerToDamage.Length; i++)
-            {
-                playerToDamage[i].GetComponent<PlayerLive>().TakeDamage(damage);
-
-
-            }*/
+  
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Plataforma
   - Pared
+  - Sword
   layers:
   - Default
   - TransparentFX

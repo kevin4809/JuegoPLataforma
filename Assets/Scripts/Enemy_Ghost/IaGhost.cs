@@ -28,7 +28,7 @@ void Update()
 	 //Physics2D.OverlapCircleAll(enemy.position, range_Vision, layer);
 	Vector3 distanceVector = target.position-transform.position;
 	float distance = distanceVector.magnitude;
-	print(distanceVector.x);
+	
 
 	if(timeBtwShot <= 0)
 	{
@@ -68,6 +68,7 @@ void Update()
     public void TakeDamage ( int damage)
     {
         healt -= damage;
+        Debug.Log("Daño");
     }
  
 

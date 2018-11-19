@@ -14,6 +14,7 @@ public class PlayerAttack : MonoBehaviour
     public float attackRange;
     public int damage;
     public float speedAttack;
+   
 
     float timeBtwAttack;
     public float startTimeBtwAttack;
@@ -33,22 +34,7 @@ public class PlayerAttack : MonoBehaviour
     {
 
 
-        if (timeBtwAttack <= 0)
-        {
-            if (isAttack)
-            {
-                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
-                
-                for (int i = 0; i < enemiesToDamage.Length; i++)
-                {
-                    enemiesToDamage[i].GetComponent<IaEnemy>().TakeDamage(damage);
-                }
-            }
-
-            timeBtwAttack = startTimeBtwAttack;
-
-        }
-        else { timeBtwAttack -= Time.deltaTime; }
+        PlayerAttackEnemys();
 
         //isAttack = Input.GetButtonDown("Fire1") ? true : false;
 
@@ -73,6 +59,7 @@ public class PlayerAttack : MonoBehaviour
         if(countAttackAir >= 0)
         {
             isAttackAir = true;
+            isAttack = false;
             countAttackAir -= Time.deltaTime;
         }
         else
@@ -89,6 +76,7 @@ public class PlayerAttack : MonoBehaviour
         {
             anim.SetBool("Isattack", true);
           GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, speedAttack);
+             
 
         }
         else if(!isAttack)
@@ -108,6 +96,28 @@ public class PlayerAttack : MonoBehaviour
             anim.SetBool("Airattack", false);
         }
         
+
+
+    }
+
+    public void PlayerAttackEnemys()
+    {
+        if (timeBtwAttack <= 0)
+        {
+            if (isAttack)
+            {
+                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
+
+                for (int i = 0; i < enemiesToDamage.Length; i++)
+                {
+                    enemiesToDamage[i].GetComponent<IaEnemy>().TakeDamage(damage);
+                }
+            }
+
+            timeBtwAttack = startTimeBtwAttack;
+
+        }
+        else { timeBtwAttack -= Time.deltaTime; }
 
 
     }

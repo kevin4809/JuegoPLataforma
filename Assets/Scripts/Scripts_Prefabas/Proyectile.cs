@@ -6,7 +6,10 @@ public class Proyectile : MonoBehaviour
 {
 public float speed;
 private Transform player;
-private Vector2 target; 
+private Vector2 target;
+
+public PlayerLive playerLive;
+public int damage;
 
 private SpriteRenderer spriteFlip;
 
@@ -35,6 +38,8 @@ void Start()
 	 {
 		 spriteFlip.flipY = true;
 	 }
+
+       
 }
 
 void Update()
@@ -49,10 +54,18 @@ void Update()
 	
 	
 }
- 
+    void OnTriggerEnter2D(Collider2D col)
+    {
+
+        if (col.gameObject.CompareTag("Player"))
+        {
+            playerLive.TakeDamage(damage);
+        }
+    }
 
 
-void DestroyProyectile()
+
+    void DestroyProyectile()
 {
 	Destroy(gameObject);
 }
