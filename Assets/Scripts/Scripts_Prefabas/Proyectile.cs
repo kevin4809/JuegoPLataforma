@@ -39,6 +39,8 @@ void Start()
 		 spriteFlip.flipY = true;
 	 }
 
+	 playerLive = GameObject.Find("Player").GetComponent<PlayerLive>();
+
        
 }
 
@@ -60,6 +62,7 @@ void Update()
         if (col.gameObject.CompareTag("Player"))
         {
             playerLive.TakeDamage(damage);
+			Debug.Log("akldhsfasf");
         }
     }
 

@@ -148,7 +148,7 @@ public class CharapterController : MonoBehaviour
 
         if (m_Grounded)
         {
-            numberSalt = 2;
+            numberSalt = 1;
         }
      }
 
