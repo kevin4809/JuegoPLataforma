@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     public Animator anim;
-    bool isAttack = false;
+    public static bool isAttack = false;
     public  bool isAttackAir = false;
     public CharapterController controller;
 
@@ -119,7 +119,22 @@ public class PlayerAttack : MonoBehaviour
         }
         else { timeBtwAttack -= Time.deltaTime; }
 
+        AnimatorStateInfo stateinfo = anim.GetCurrentAnimatorStateInfo(0);
+        bool isAirAttack = stateinfo.IsName("Player_air_attack");
 
+        
+        
+            if (isAirAttack)
+            {
+                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
+
+                for (int i = 0; i < enemiesToDamage.Length; i++)
+                {
+                    enemiesToDamage[i].GetComponent<IaGhost>().TakeDamage(damage);
+                }
+            }
+
+        
     }
 
     private void OnDrawGizmosSelected()

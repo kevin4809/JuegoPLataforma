@@ -59,7 +59,7 @@ void Update()
 	
 	    if(healt <= 0)
         {
-            Debug.Log("HeIsDeath");
+           // Debug.Log("HeIsDeath");
         }
 	
 }

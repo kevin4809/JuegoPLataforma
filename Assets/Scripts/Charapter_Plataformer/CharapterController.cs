@@ -56,7 +56,11 @@ public class CharapterController : MonoBehaviour
 
         // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
         // This can be done using layers instead but Sample Assets will not overwrite your project settings.
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround );
+        /*foreach(Collider2D c in colliders)
+        {
+            print(c.name);
+        }*/
         for (int i = 0; i < colliders.Length; i++)
         {
             if (colliders[i].gameObject != gameObject)
@@ -163,4 +167,10 @@ public class CharapterController : MonoBehaviour
          theScale.x *= -1;
          transform.localScale = theScale;
      }
-        }            
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(m_GroundCheck.position, k_GroundedRadius);
+    }
+}            

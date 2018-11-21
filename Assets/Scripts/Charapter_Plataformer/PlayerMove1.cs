@@ -62,7 +62,7 @@ public class PlayerMove1 : MonoBehaviour
         }
        
 
-        if (Input.GetButtonDown("Jump") && !heSlide ) { jump = true; }
+        if (Input.GetButtonDown("Jump") && !heSlide && !PlayerAttack.isAttack) { jump = true; }
         crouch = Input.GetButtonDown("Crouch") ? true : false;
 
         anim.SetFloat("Speed", Mathf.Abs(horizontalMove));
