@@ -24,7 +24,7 @@ void Start()
 	target = new Vector2(player.position.x, player.position.y);
 	spriteFlip = GetComponent<SpriteRenderer>();
 
-	targetPos = player.position;
+	 targetPos = player.position;
      thispos = transform.position;
      targetPos.x = targetPos.x - thispos.x;
      targetPos.y = targetPos.y - thispos.y;

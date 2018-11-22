@@ -43,7 +43,7 @@ public class PlayerMove1 : MonoBehaviour
         bool isAirAttack = stateinfo.IsName("Player_air_attack");
         bool heIsDown = stateinfo.IsName("Down_Player");
 
-        if ( !isUp)
+        if ( !isUp && Time.timeScale == 1.0f)
         {
             horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
         }

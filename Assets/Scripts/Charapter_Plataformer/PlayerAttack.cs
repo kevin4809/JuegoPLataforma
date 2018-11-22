@@ -38,7 +38,7 @@ public class PlayerAttack : MonoBehaviour
 
         //isAttack = Input.GetButtonDown("Fire1") ? true : false;
 
-        if (isAttack = Input.GetButtonDown("Fire1"))
+        if (isAttack = Input.GetButtonDown("Fire1") && Time.timeScale == 1.0f)
         {
             countAttack = StartCountAttack;
         }
@@ -51,7 +51,7 @@ public class PlayerAttack : MonoBehaviour
         else { isAttack = false; }
 
 
-        if (Input.GetButtonDown("Fire1") && !controller.m_Grounded)
+        if (Input.GetButtonDown("Fire1") && !controller.m_Grounded && Time.timeScale == 1.0f)
         {
             
             countAttackAir = StartCountAttackAir;

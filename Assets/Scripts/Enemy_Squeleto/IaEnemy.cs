@@ -18,8 +18,6 @@ public class IaEnemy : MonoBehaviour
     public int healt = 100;
     float dins = 5;
 
-
-
     //Attack
     bool isAttack;
     float timeBtwAttack;
@@ -101,33 +99,21 @@ public class IaEnemy : MonoBehaviour
             anim.SetTrigger("HeDamage");
             // transform.Translate(Vector3.left * distance * Time.deltaTime);
             rest = startRest;
-            probably_Attack = Random.Range(0, 2);
+            probably_Attack = 1;
            
         }
     }
     void Attack()
     {
 
-        if (probably_Attack == 1)
-        {
-            turn();
-            probably_Attack = 0;
-
-        }
-
         AnimatorStateInfo stateinfo = anim.GetCurrentAnimatorStateInfo(0);
         bool isHurt = stateinfo.IsName("Hurt_Enemy");
         bool isAttaking = stateinfo.IsName("Attack_Enemy");
 
-        if (isAttaking)
-        {
-            enemyTrigger.isTrigger = true;
-        }
-        else { enemyTrigger.isTrigger = false; }
-
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, rangeVision, layer);
         if (hit.collider && !isAttaking && rest <= 0)
         {
+            
             isAttack = true;
 
             if (movingRight)
@@ -143,6 +129,32 @@ public class IaEnemy : MonoBehaviour
                 rest = startRest;
             }
         }
+
+        if (isAttaking)
+        {
+            enemyTrigger.enabled = false;
+        }
+        else
+        {
+            enemyTrigger.enabled = true;
+        }
+
+        if (probably_Attack == 1)
+        {
+          
+            probably_Attack = 0;
+            print("hola");
+        }
+
+       
+
+        if (isAttaking)
+        {
+            enemyTrigger.isTrigger = true;
+        }
+        else { enemyTrigger.isTrigger = false; }
+
+     
 
         if (isAttaking)
         {

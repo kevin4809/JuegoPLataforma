@@ -2,13 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerLive : MonoBehaviour
 {
     public int healt = 100;
     public Animator anim;
-         
-   
+    public Sprite[] heart;
+    public Image[] heartUi;
+    public int lives = 3;
+     
+
+    public void Start()
+    {
+        for(int i = 0; i< heartUi.Length; i++)
+        {
+            heartUi[i].sprite = heart[0];
+        }
+    }
 
     public void TakeDamage(int damage)
     {
@@ -16,6 +27,16 @@ public class PlayerLive : MonoBehaviour
        
             print("AUSHHHH");
             anim.SetTrigger("Down");
+       if (lives > 1)
+        {
+            lives -= 1;
+            heartUi[lives].color = Color.black;
+            print("alsfhajksf");
+        }
+        else 
+        {
+            SceneManager.LoadScene("Plataformero");
+        }
 
     }
 
