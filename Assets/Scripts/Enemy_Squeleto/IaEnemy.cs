@@ -27,8 +27,6 @@ public class IaEnemy : MonoBehaviour
     bool heIsDeath = false;
     Collider2D enemyTrigger;
 
-   public float probably_Attack;
-
     public float speetInAttack;
     Rigidbody2D rb;
 
@@ -37,10 +35,20 @@ public class IaEnemy : MonoBehaviour
 
     float rest;
     public float startRest;
+    float speedTurn;
+
+    //TargetPlayer
+    private Transform target;
+   
+
+    private void Awake()
+    {
+        target = FindObjectOfType<PlayerAttack>().transform;
+    }
 
     private void Start()
     {
-
+        speedTurn = speed;
         rb = GetComponent<Rigidbody2D>();
         sword.enabled = false;
         enemyTrigger = GetComponent<Collider2D>();
@@ -48,6 +56,8 @@ public class IaEnemy : MonoBehaviour
 
     void Update()
     {
+      
+        
 
         if (heIsWalkgin && !heIsDeath)
         {
@@ -99,8 +109,27 @@ public class IaEnemy : MonoBehaviour
             anim.SetTrigger("HeDamage");
             // transform.Translate(Vector3.left * distance * Time.deltaTime);
             rest = startRest;
-            probably_Attack = 1;
-           
+
+            Vector3 distanceVector = target.position - transform.position;
+            float distance = distanceVector.magnitude;
+
+            if(distanceVector.x > 0 && !movingRight)
+            {
+                Debug.Log("aklhsfasf");
+                rb.bodyType = RigidbodyType2D.Dynamic;
+                rb.AddForce(-transform.right * 100);
+                StartCoroutine(CountRest());
+            }
+            else
+            {
+                if(distanceVector.x < 0 && movingRight)
+                {
+                    Debug.Log("alñfjsaf");
+                    rb.bodyType = RigidbodyType2D.Dynamic;
+                    rb.AddForce(transform.right * 100);
+                    StartCoroutine(CountRest());
+                }
+            }
         }
     }
     void Attack()
@@ -137,13 +166,6 @@ public class IaEnemy : MonoBehaviour
         else
         {
             enemyTrigger.enabled = true;
-        }
-
-        if (probably_Attack == 1)
-        {
-          
-            probably_Attack = 0;
-            print("hola");
         }
 
        
@@ -217,12 +239,19 @@ public class IaEnemy : MonoBehaviour
 
     IEnumerator countC2()
     {
+        
         yield return new WaitForSeconds(0.7f);
         GetComponent<Rigidbody2D>().velocity = Vector2.left * speetInAttack;
         yield return new WaitForSeconds(0.1f);
         rb.velocity = Vector2.zero;
     }
 
+    IEnumerator CountRest()
+    {
+        yield return new WaitForSeconds(0.5f);
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        turn();
+        rest = 0;
+    }
 
-  
 }

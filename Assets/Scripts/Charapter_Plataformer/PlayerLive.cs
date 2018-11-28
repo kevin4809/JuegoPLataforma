@@ -35,7 +35,7 @@ public class PlayerLive : MonoBehaviour
         }
         else 
         {
-            SceneManager.LoadScene("Plataformero");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
     }
@@ -50,7 +50,7 @@ public class PlayerLive : MonoBehaviour
             timer += Time.deltaTime;
             GetComponent<Rigidbody2D>().AddForce(new Vector3(knockbackDir.x * 50 ,knockbackDir.y * -100 , transform.position.z));
             yield return new WaitForSeconds(0.2f);
-            SceneManager.LoadScene("Plataformero");
+           SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         yield return 0;

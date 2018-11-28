@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
-    public PlayerLive playerLive;
+    private PlayerLive playerLive;
 
     public int damage;
 
+    private void Awake()
+    {
+        playerLive = FindObjectOfType<PlayerAttack>().GetComponent<PlayerLive>();
+    }
 
-   
     void OnTriggerEnter2D(Collider2D col)
     {
      

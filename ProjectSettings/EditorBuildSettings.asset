@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Plataformero.unity
     guid: 3528a7295f5d21440b09d0355e286f3d
+  - enabled: 1
+    path: Assets/Scenes/2level.unity
+    guid: 6d6782d33937a284e99fbbf791553f4b
   m_configObjects: {}

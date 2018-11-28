@@ -25,11 +25,19 @@ public class PlayerMove1 : MonoBehaviour
     float numJumps;
     float time_Recover;
     float save_RunSpeed;
+
+    private GameMaster gm;
+
+
     private void Start()
     {
+        gm = GameObject.Find("GM").GetComponent<GameMaster>();
+        transform.position = gm.lastChekPointPos;
+
         controller = GetComponent<CharapterController>();
         dash_Collider_Charapter.enabled = false;
         save_RunSpeed = runSpeed;
+        
     }
 
     void Update()

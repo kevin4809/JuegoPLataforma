@@ -38,6 +38,12 @@ public class ScenManager : MonoBehaviour
                 PauseGame();
                 break;
 
+            case "Restart":
+                SceneManager.LoadScene("Plataformero");
+                PauseGame();
+                break;
+
+
         }
 
 
