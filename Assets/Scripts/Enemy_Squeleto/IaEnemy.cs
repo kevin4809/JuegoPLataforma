@@ -115,18 +115,18 @@ public class IaEnemy : MonoBehaviour
 
             if(distanceVector.x > 0 && !movingRight)
             {
-                Debug.Log("aklhsfasf");
+                
                 rb.bodyType = RigidbodyType2D.Dynamic;
-                rb.AddForce(-transform.right * 100);
+                rb.AddForce(-transform.right * 130);
                 StartCoroutine(CountRest());
             }
             else
             {
                 if(distanceVector.x < 0 && movingRight)
                 {
-                    Debug.Log("alñfjsaf");
+                  
                     rb.bodyType = RigidbodyType2D.Dynamic;
-                    rb.AddForce(transform.right * 100);
+                    rb.AddForce(transform.right * 130);
                     StartCoroutine(CountRest());
                 }
             }

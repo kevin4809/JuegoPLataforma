@@ -15,7 +15,9 @@ private float timeBtwShot;
 SpriteRenderer spriteRenderer;
 public float startTimeBtwShots;
 
-    public float healt = 100;
+bool heIsDeath = false;
+
+public float healt = 2000;
 //public LayerMask layer;
 void Awake()
 {
@@ -32,7 +34,7 @@ void Update()
 
 	if(timeBtwShot <= 0)
 	{
-        if(distance <= range_Vision)
+        if(distance <= range_Vision && !heIsDeath)
 		{
 		 
         StartCoroutine(CountAttack());
@@ -47,7 +49,7 @@ void Update()
 	}
 	
 
-		if(distanceVector.x > 0)
+		if(distanceVector.x > 0 && !heIsDeath)
 		{
           spriteRenderer.flipX = true;
 		   heIsRight = true;
@@ -56,25 +58,45 @@ void Update()
 			spriteRenderer.flipX = false;
 			heIsRight = false;
 		}
-	
-	    if(healt <= 0)
+
+        if (healt <= 0)
         {
-           // Debug.Log("HeIsDeath");
+            heIsDeath = true;
+            anim.Play("Death_ghost");
+            StartCoroutine(CountAttack());
         }
-	
-}
+
+
+
+        AnimatorStateInfo stateinfo = anim.GetCurrentAnimatorStateInfo(0);
+        bool Isattack = stateinfo.IsName("Touch_ghost");
+
+        if (Isattack)
+        {
+            anim.SetBool("Isattack", false);
+        }
+
+
+    }
 
 
     public void TakeDamage ( int damage)
     {
         healt -= damage;
-        Debug.Log("Daño");
+        anim.SetBool("Isattack", true);
+
     }
- 
+
+
 
  IEnumerator CountAttack()
- {
-	 yield return new WaitForSeconds(1);
+    {
+        if (heIsDeath)
+        {
+            yield return new WaitForSeconds(0.5f);
+            Destroy(gameObject);
+        }
+        yield return new WaitForSeconds(1);
 	  Instantiate(proyectile, transform.position, Quaternion.identity);
  }
 
