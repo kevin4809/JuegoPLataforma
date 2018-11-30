@@ -87,8 +87,6 @@ public class PlayerMove1 : MonoBehaviour
       
         Dash();
 
-        
-
     }
 
     void Dash()

@@ -32,11 +32,6 @@ private float offset;
      transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + offset));
 	 playerLive = GameObject.Find("Player").GetComponent<PlayerLive>();
 
-       
-}
-
-void Update()
-{
 
         Vector3 distanceVector = target2.position - transform.position;
         float distance = distanceVector.magnitude;
@@ -49,6 +44,13 @@ void Update()
         {
             spriteFlip.flipY = true;
         }
+
+    }
+
+void Update()
+{
+
+       
 
         transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
 	if(transform.position.x == target.x && transform.position.y == target.y)

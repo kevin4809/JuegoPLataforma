@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 241084108}
   - component: {fileID: 241084109}
   m_Layer: 0
-  m_Name: PassLevel
+  m_Name: W
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -313,8 +313,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 241084107}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 64.91, y: 16.65, z: 4.807617}
-  m_LocalScale: {x: 2.9215, y: 2.9215, z: 2.9215}
+  m_LocalPosition: {x: 64.91, y: 15.83, z: 4.807617}
+  m_LocalScale: {x: 1.3511938, y: 1.1686, z: 2.9215}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 16
@@ -527,6 +527,11 @@ Prefab:
     - target: {fileID: 1359553297480672, guid: 3f62afd12aa12434a933ab51c6fab2aa, type: 2}
       propertyPath: m_Name
       value: Ghost (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114172672003631540, guid: 3f62afd12aa12434a933ab51c6fab2aa,
+        type: 2}
+      propertyPath: range_Vision
+      value: 4.66
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f62afd12aa12434a933ab51c6fab2aa, type: 2}
@@ -1839,6 +1844,11 @@ Prefab:
     - target: {fileID: 1359553297480672, guid: 3f62afd12aa12434a933ab51c6fab2aa, type: 2}
       propertyPath: m_Name
       value: Ghost (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114172672003631540, guid: 3f62afd12aa12434a933ab51c6fab2aa,
+        type: 2}
+      propertyPath: range_Vision
+      value: 4.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f62afd12aa12434a933ab51c6fab2aa, type: 2}

@@ -23,6 +23,7 @@ void Awake()
 {
 	target = FindObjectOfType<PlayerAttack>().transform;
 	spriteRenderer = GetComponent<SpriteRenderer>();
+        GameMaster.countEnemy += 1;
 }
 
 void Update()
@@ -94,6 +95,7 @@ void Update()
         if (heIsDeath)
         {
             yield return new WaitForSeconds(0.5f);
+            GameMaster.countEnemy -= 1;
             Destroy(gameObject);
         }
         yield return new WaitForSeconds(1);

@@ -11,7 +11,7 @@ public class PlayerLive : MonoBehaviour
     public Sprite[] heart;
     public Image[] heartUi;
     public int lives = 3;
-     
+     public Text tex = null;
 
     public void Start()
     {
@@ -19,6 +19,7 @@ public class PlayerLive : MonoBehaviour
         {
             heartUi[i].sprite = heart[0];
         }
+        tex = GameObject.Find("TX").GetComponent<Text>();
     }
 
     public void TakeDamage(int damage)
@@ -36,6 +37,7 @@ public class PlayerLive : MonoBehaviour
         else 
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            GameMaster.countEnemy = 0;
         }
 
     }
@@ -51,6 +53,7 @@ public class PlayerLive : MonoBehaviour
             GetComponent<Rigidbody2D>().AddForce(new Vector3(knockbackDir.x * 50 ,knockbackDir.y * -100 , transform.position.z));
             yield return new WaitForSeconds(0.2f);
            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            GameMaster.countEnemy = 0;
         }
 
         yield return 0;
@@ -64,5 +67,6 @@ public class PlayerLive : MonoBehaviour
         {
 
         }
+        tex.text = "Numero enemigos " + GameMaster.countEnemy;
     }
 }

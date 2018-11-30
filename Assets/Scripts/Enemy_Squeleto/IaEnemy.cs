@@ -44,6 +44,7 @@ public class IaEnemy : MonoBehaviour
     private void Awake()
     {
         target = FindObjectOfType<PlayerAttack>().transform;
+        GameMaster.countEnemy += 1;
     }
 
     private void Start()
@@ -112,24 +113,29 @@ public class IaEnemy : MonoBehaviour
 
             Vector3 distanceVector = target.position - transform.position;
             float distance = distanceVector.magnitude;
+            float randomNumber = Random.Range(0, 3);
 
-            if(distanceVector.x > 0 && !movingRight)
+            if(randomNumber == 2 || randomNumber == 3)
             {
-                
-                rb.bodyType = RigidbodyType2D.Dynamic;
-                rb.AddForce(-transform.right * 130);
-                StartCoroutine(CountRest());
-            }
-            else
-            {
-                if(distanceVector.x < 0 && movingRight)
+                if (distanceVector.x > 0 && !movingRight)
                 {
-                  
+
                     rb.bodyType = RigidbodyType2D.Dynamic;
-                    rb.AddForce(transform.right * 130);
+                    rb.AddForce(-transform.right * 130);
                     StartCoroutine(CountRest());
                 }
+                else
+                {
+                    if (distanceVector.x < 0 && movingRight)
+                    {
+
+                        rb.bodyType = RigidbodyType2D.Dynamic;
+                        rb.AddForce(transform.right * 130);
+                        StartCoroutine(CountRest());
+                    }
+                }
             }
+           
         }
     }
     void Attack()
@@ -227,6 +233,7 @@ public class IaEnemy : MonoBehaviour
         if (heIsDeath)
         {
             yield return new WaitForSeconds(0.8f);
+            GameMaster.countEnemy -= 1;
             Destroy(gameObject);
         }
         yield return new WaitForSeconds(0.7f);

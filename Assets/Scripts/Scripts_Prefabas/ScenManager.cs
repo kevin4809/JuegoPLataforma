@@ -12,6 +12,7 @@ public class ScenManager : MonoBehaviour
     private void Awake()
     {
         canMenu.gameObject.SetActive(false);
+        Time.timeScale = 1.0F;
     }
 
     public void ActivarScena(string loadGame)
@@ -58,6 +59,8 @@ public class ScenManager : MonoBehaviour
             canMenu.gameObject.SetActive(true);
    
         }
+
+       
 
     }
     public void PauseGame()
