@@ -16,6 +16,7 @@ public class PassLevel : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             SceneManager.LoadScene("2level");
+            GameMaster.countEnemy = 0;
             print("PassLevel");
         }
     }
