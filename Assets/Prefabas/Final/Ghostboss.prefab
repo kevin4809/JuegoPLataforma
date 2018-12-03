@@ -123,7 +123,7 @@ MonoBehaviour:
   target: {fileID: 0}
   range_Vision: 8.32
   startTimeBtwShots: 4.5
-  healt: 2000
+  healt: 4000
 --- !u!212 &212003129779951648
 SpriteRenderer:
   m_ObjectHideFlags: 1

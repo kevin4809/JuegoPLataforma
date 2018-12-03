@@ -44,7 +44,7 @@ public class IaEnemy : MonoBehaviour
     private void Awake()
     {
         target = FindObjectOfType<PlayerAttack>().transform;
-        GameMaster.countEnemy += 1;
+        Spw.countEnemy += 1;
     }
 
     private void Start()
@@ -233,7 +233,7 @@ public class IaEnemy : MonoBehaviour
         if (heIsDeath)
         {
             yield return new WaitForSeconds(0.8f);
-            GameMaster.countEnemy -= 1;
+            Spw.countEnemy -= 1;
             Destroy(gameObject);
         }
         yield return new WaitForSeconds(0.7f);

@@ -23,10 +23,14 @@ void Awake()
 {
 	target = FindObjectOfType<PlayerAttack>().transform;
 	spriteRenderer = GetComponent<SpriteRenderer>();
-        GameMaster.countEnemy += 1;
+       
 }
+    private void Start()
+    {
+        Spw.countEnemy += 1;
+    }
 
-void Update()
+    void Update()
 {
 	 //Physics2D.OverlapCircleAll(enemy.position, range_Vision, layer);
 	Vector3 distanceVector = target.position-transform.position;
@@ -95,7 +99,7 @@ void Update()
         if (heIsDeath)
         {
             yield return new WaitForSeconds(0.5f);
-            GameMaster.countEnemy -= 1;
+            Spw.countEnemy -= 1;
             Destroy(gameObject);
         }
         yield return new WaitForSeconds(1);
