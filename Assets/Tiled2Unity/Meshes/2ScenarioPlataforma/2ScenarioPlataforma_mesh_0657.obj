@@ -1,0 +1,31 @@
+﻿# Tiled2Unity generated file. Do not modify by hand.
+# Wavefront file for '2ScenarioPlataforma_mesh_0657.obj'
+
+# Vertices (Count = 8)
+v -128 -256 0
+v -144 -256 0
+v -144 -240 0
+v -128 -240 0
+v -144 -256 0
+v -160 -256 0
+v -160 -240 0
+v -144 -240 0
+
+# Texture cooridinates (Count = 6)
+vt 0.8829787 0.3125
+vt 0.893617 0.3125
+vt 0.893617 0.375
+vt 0.8829787 0.375
+vt 0.9042553 0.3125
+vt 0.9042553 0.375
+
+# Normal
+vn 0 0 -1
+
+# Mesh description
+g 2ScenarioPlataforma_mesh_0657
+
+# Faces
+f 1/1/1 2/2/1 3/3/1 4/4/1
+f 5/2/1 6/5/1 7/6/1 8/3/1
+

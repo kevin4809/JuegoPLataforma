@@ -32,6 +32,7 @@ public class PlayerMove1 : MonoBehaviour
     private void Start()
     {
         gm = GameObject.Find("GM").GetComponent<GameMaster>();
+        print(gm.lastChekPointPos);
         transform.position = gm.lastChekPointPos;
 
         controller = GetComponent<CharapterController>();

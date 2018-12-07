@@ -11,7 +11,6 @@ public class PositionPlayer : MonoBehaviour {
     {
         tp = GameObject.Find("CheckPoint").GetComponent<Transform>();
         player = GameObject.Find("Player").GetComponent<Transform>();
-
-        player.transform.position = tp.transform.position;
+     
     }
 }

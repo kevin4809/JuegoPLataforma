@@ -8,13 +8,15 @@ public class GameMaster : MonoBehaviour
 
     private static GameMaster instance;
     public Vector2 lastChekPointPos;
-     
+
+    
+    
     private void Awake()
     {
         if(instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(instance);
+         //  DontDestroyOnLoad(instance);
 
         }
         else
@@ -26,3 +28,4 @@ public class GameMaster : MonoBehaviour
     }
 
 }
+

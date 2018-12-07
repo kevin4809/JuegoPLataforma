@@ -7,12 +7,14 @@ public class ScenManager : MonoBehaviour
 {
     public bool isPaused = false;
     public GameObject canMenu;
+    public GameObject canCreditos;
 
 
-    private void Awake()
+    private void Start()
     {
+       
+        canCreditos.gameObject.SetActive(false);
         canMenu.gameObject.SetActive(false);
-        Time.timeScale = 1.0F;
     }
 
     public void ActivarScena(string loadGame)
@@ -20,10 +22,10 @@ public class ScenManager : MonoBehaviour
         switch (loadGame)
         {
             case "Play":
-                SceneManager.LoadScene("Plataformero");
                 print("Hola");
+                SceneManager.LoadScene("Plataformero");
+                
                 break;
-
 
             case "Exit":
                 Application.Quit();
@@ -32,6 +34,7 @@ public class ScenManager : MonoBehaviour
             case "Return":
                 PauseGame();
                 canMenu.gameObject.SetActive(false);
+
                 break;
 
             case "Menu":
@@ -43,6 +46,18 @@ public class ScenManager : MonoBehaviour
                 SceneManager.LoadScene("Plataformero");
                 PauseGame();
                 break;
+
+            case "R":
+                canCreditos.gameObject.SetActive(true);
+                canMenu.gameObject.SetActive(false);
+                break;
+
+            case "R2":
+                canCreditos.gameObject.SetActive(false);
+                canMenu.gameObject.SetActive(true);
+                break;
+
+
 
 
         }
