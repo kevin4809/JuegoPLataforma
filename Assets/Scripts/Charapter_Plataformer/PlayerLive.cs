@@ -1,8 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class PlayerLive : MonoBehaviour
 {
@@ -11,7 +10,7 @@ public class PlayerLive : MonoBehaviour
     public Sprite[] heart;
     public Image[] heartUi;
     public int lives = 3;
-     public Text tex = null;
+    public Text tex = null;
 
 
     public void Start()

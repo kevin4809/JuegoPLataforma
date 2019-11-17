@@ -12,9 +12,16 @@ public class ScenManager : MonoBehaviour
 
     private void Start()
     {
-       
-        canCreditos.gameObject.SetActive(false);
-        canMenu.gameObject.SetActive(false);
+
+        if (canCreditos)
+        {
+            canCreditos.gameObject.SetActive(false);
+        }
+        if (canMenu)
+        {
+            canMenu.gameObject.SetActive(false);
+        }
+
     }
 
     public void ActivarScena(string loadGame)
@@ -74,9 +81,6 @@ public class ScenManager : MonoBehaviour
             canMenu.gameObject.SetActive(true);
    
         }
-
-       
-
     }
     public void PauseGame()
     {
